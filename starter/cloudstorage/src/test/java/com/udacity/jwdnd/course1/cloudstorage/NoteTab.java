@@ -27,7 +27,7 @@ public class NoteTab {
                 .until(d -> d.findElement(By.id("new-note-btn")).isDisplayed());
         PageFactory.initElements(driver, this);
         this.noteRows = noteRowElements.stream()
-                .map(NoteRow::new)
+                .map(row -> new NoteRow(row, driver))
                 .collect(Collectors.toList());
         this.driver = driver;
     }
@@ -39,6 +39,6 @@ public class NoteTab {
     public void addNewNote(String title, String description) {
         this.newNoteBtn.click();
         this.noteModal = new NoteModal(driver);
-        this.noteModal.addNote(title, description);
+        this.noteModal.submit(title, description);
     }
 }

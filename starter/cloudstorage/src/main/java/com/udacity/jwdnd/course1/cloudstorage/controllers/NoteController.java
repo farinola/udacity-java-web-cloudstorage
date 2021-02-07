@@ -23,7 +23,7 @@ public class NoteController {
     public ModelAndView createOrEdit(@ModelAttribute("noteForm") Note note) {
         User activeUser = userService.getActiveUser();
         note.setUserId(activeUser.getId());
-        noteService.createNote(note);
+        noteService.createOrUpdateNote(note);
         return new ModelAndView("redirect:/home");
     }
 

@@ -18,7 +18,10 @@ public class NoteService {
         return this.noteMapper.getAll();
     }
 
-    public int createNote(Note note) {
+    public int createOrUpdateNote(Note note) {
+        if (note.getId() != null) {
+            return this.noteMapper.update(note);
+        }
         return this.noteMapper.insert(note);
     }
 

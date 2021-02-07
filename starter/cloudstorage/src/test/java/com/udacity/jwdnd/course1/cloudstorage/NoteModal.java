@@ -33,7 +33,12 @@ public class NoteModal {
         return modalDiv.isDisplayed();
     }
 
-    public void addNote(String title, String description) {
+    public void clear() {
+        this.titleInput.clear();
+        this.descriptionInput.clear();
+    }
+
+    public void submit(String title, String description) {
         this.titleInput.sendKeys(title);
         this.descriptionInput.sendKeys(description);
         this.submit();
