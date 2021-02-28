@@ -1,11 +1,13 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.springframework.test.context.ContextConfiguration;
 
+@ContextConfiguration
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class HomePageTest extends PageTest {
 
-    private HomePage homePage;
+    static HomePage homePage;
 
     public void navigateToHome() {
         SignupPage signupPage = SignupPageTest.signupCorrectly(driver, port, validUser);
@@ -15,14 +17,15 @@ public class HomePageTest extends PageTest {
     }
 
     @Test
-    public void getLoginPage() {
+    @Order(1)
+    public void getHomePage() {
         navigateToHome();
         Assertions.assertEquals("Home", driver.getTitle());
     }
 
     @Test
+    @Order(2)
     public void addNewNote() {
-        navigateToHome();
         NoteTab noteTab = homePage.selectNoteTab();
         Assertions.assertEquals(0, noteTab.getNoteRows().size());
         noteTab.addNewNote("note1", "testing 1");
@@ -31,8 +34,8 @@ public class HomePageTest extends PageTest {
     }
 
     @Test
+    @Order(3)
     public void updateNote() {
-        navigateToHome();
         NoteTab noteTab = homePage.selectNoteTab();
         noteTab.addNewNote("note1", "testing 1");
         noteTab = homePage.selectNoteTab();
@@ -44,15 +47,15 @@ public class HomePageTest extends PageTest {
     }
 
     @Test
+    @Order(4)
     public void deleteNote() {
-        navigateToHome();
         NoteTab noteTab = homePage.selectNoteTab();
-        Assertions.assertEquals(0, noteTab.getNoteRows().size());
+        int noOfNotes = noteTab.getNoteRows().size();
         noteTab.addNewNote("note1", "testing 1");
         noteTab = homePage.selectNoteTab();
-        Assertions.assertEquals(1, noteTab.getNoteRows().size());
+        Assertions.assertEquals(noOfNotes + 1, noteTab.getNoteRows().size());
         noteTab.getNoteRows().get(0).delete();
         NoteTab modifiedNoteTab = homePage.selectNoteTab();
-        Assertions.assertEquals(0, modifiedNoteTab.getNoteRows().size());
+        Assertions.assertEquals(noOfNotes, modifiedNoteTab.getNoteRows().size());
     }
 }

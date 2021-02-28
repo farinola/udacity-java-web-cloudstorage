@@ -19,7 +19,7 @@ public class SignupPageTest extends PageTest {
 
     @Test
     public void getSignupPage() {
-        this.signupPage = navigateToSignupPage(this.driver, this.port);
+        this.signupPage = navigateToSignupPage(driver, this.port);
         Assertions.assertEquals("Sign Up", driver.getTitle());
     }
 

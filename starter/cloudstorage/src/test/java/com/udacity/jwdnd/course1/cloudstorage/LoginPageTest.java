@@ -18,13 +18,13 @@ public class LoginPageTest extends PageTest {
 
     @Test
     public void getLoginPage() {
-        this.loginPage = navigateToLoginPage(this.driver, this.port);
+        this.loginPage = navigateToLoginPage(driver, this.port);
         Assertions.assertEquals("Login", driver.getTitle());
     }
 
     @Test
     public void testInvalidLogin() {
-        this.loginPage = navigateToLoginPage(this.driver, this.port);
+        this.loginPage = navigateToLoginPage(driver, this.port);
         loginPage.login("funso", "password123");
         Assertions.assertEquals(loginPage.getErrorMsg(), "Invalid username or password");
     }
@@ -35,7 +35,7 @@ public class LoginPageTest extends PageTest {
         Assertions.assertNotNull(signupPage.getSuccessMsg());
         Assertions.assertThrows(NoSuchElementException.class, signupPage::getErrorMsg);
 
-        this.loginPage = navigateToLoginPage(this.driver, this.port);
+        this.loginPage = navigateToLoginPage(driver, this.port);
         loginPage.login(validUser.getUsername(), validUser.getPassword());
         Assertions.assertThrows(NoSuchElementException.class, () -> loginPage.getErrorMsg());
     }
