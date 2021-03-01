@@ -28,14 +28,14 @@ public class HomeController {
         this.noteService = noteService;
     }
 
-    @ModelAttribute("credentials")
+    @ModelAttribute("storedCredentials")
     public List<Credential> credentials() {
         return this.credentialService.getAllCredentials();
     }
 
     @ModelAttribute("notes")
     public List<Note> notes() {
-        return this.noteService.getAllNotes();
+        return this.noteService.getAll();
     }
 
     @ModelAttribute("files")
@@ -44,7 +44,8 @@ public class HomeController {
     }
 
     @GetMapping
-    public String home(@ModelAttribute("noteForm") Note noteForm) {
+    public String home(@ModelAttribute("noteForm") Note noteForm,
+                       @ModelAttribute("credentialForm") Credential credentialForm) {
         return "home";
     }
 }

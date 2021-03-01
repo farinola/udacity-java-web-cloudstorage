@@ -14,18 +14,18 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    public List<Note> getAllNotes() {
+    public List<Note> getAll() {
         return this.noteMapper.getAll();
     }
 
-    public int createOrUpdateNote(Note note) {
+    public int createOrUpdate(Note note) {
         if (note.getId() != null) {
             return this.noteMapper.update(note);
         }
         return this.noteMapper.insert(note);
     }
 
-    public void deleteNoteById(int id) {
+    public void delete(int id) {
         this.noteMapper.delete(id);
     }
 }

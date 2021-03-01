@@ -32,12 +32,22 @@ public class HomePage {
     }
 
     public NoteTab selectNoteTab() {
-        this.notesTabNav.click();
+        this.selectTab(this.notesTabNav);
+        return new NoteTab(driver);
+    }
+
+    public CredentialTab selectCredentialTab() {
+        this.selectTab(this.credentialsTabNav);
+        return new CredentialTab(driver);
+    }
+
+    protected void selectTab(WebElement tabNavElement) {
+        tabNavElement.click();
         new WebDriverWait(driver, 3)
                 .until(d -> {
-                    this.notesTabNav.click();
-                    return d.findElement(By.id("nav-notes-tab")).getAttribute("class").contains("active");
+                    tabNavElement.click();
+                    WebElement element = d.findElement(By.id(tabNavElement.getAttribute("id")));
+                    return element.getAttribute("class").contains("active");
                 });
-        return new NoteTab(driver);
     }
 }

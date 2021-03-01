@@ -23,13 +23,13 @@ public class NoteController {
     public ModelAndView createOrEdit(@ModelAttribute("noteForm") Note note) {
         User activeUser = userService.getActiveUser();
         note.setUserId(activeUser.getId());
-        noteService.createOrUpdateNote(note);
+        noteService.createOrUpdate(note);
         return new ModelAndView("redirect:/home");
     }
 
     @GetMapping("/{id}/delete")
     public ModelAndView delete(@PathVariable int id) {
-        this.noteService.deleteNoteById(id);
+        this.noteService.delete(id);
         return new ModelAndView("redirect:/home");
     }
 }
