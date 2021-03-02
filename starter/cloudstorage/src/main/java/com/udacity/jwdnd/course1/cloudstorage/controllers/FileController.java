@@ -1,29 +1,46 @@
 package com.udacity.jwdnd.course1.cloudstorage.controllers;
 
-import com.udacity.jwdnd.course1.cloudstorage.models.File;
+import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("files")
 public class FileController {
+    private final FileService fileService;
+    private final UserService userService;
+
+    public FileController(FileService fileService, UserService userService) {
+        this.fileService = fileService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/view/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> view(@PathVariable String filename) {
+        Resource file = fileService.loadAsResource(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\""
+                ).body(file);
+    }
+
     @PostMapping
-    public ModelAndView create(@ModelAttribute File file, Model model) {
+    public ModelAndView create(@RequestParam("fileUpload") MultipartFile file) {
+        int userId = userService.getActiveUser().getId();
+        fileService.create(file, userId);
         return new ModelAndView("redirect:/home");
     }
 
-    @PostMapping("/{id}")
-    public ModelAndView edit(@ModelAttribute File file, Model model) {
-        return new ModelAndView("redirect:/home");
-    }
-
-    @DeleteMapping("/{id}")
-    public ModelAndView delete(@ModelAttribute File file) {
+    @GetMapping("/{id}/delete")
+    public ModelAndView delete(@PathVariable("id") int id) {
+        this.fileService.delete(id);
         return new ModelAndView("redirect:/home");
     }
 }
