@@ -10,7 +10,7 @@ public class Row {
     protected final WebDriver driver;
 
     public Row(WebElement row, WebDriver driver) {
-        this.editBtn = row.findElement(By.xpath("//td//button"));
+        this.editBtn = row.findElement(By.tagName("button"));
         this.deleteLink = row.findElements(By.tagName("td")).get(0).findElement(By.tagName("a"));
         this.driver = driver;
     }

@@ -25,7 +25,8 @@ public class NoteModal {
     private WebElement saveChangesBtn;
 
     public NoteModal(WebDriver driver) {
-        new WebDriverWait(driver, 3)
+        int TIMEOUT_IN_SECONDS = 3;
+        new WebDriverWait(driver, TIMEOUT_IN_SECONDS)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("noteModal")));
         PageFactory.initElements(driver, this);
     }

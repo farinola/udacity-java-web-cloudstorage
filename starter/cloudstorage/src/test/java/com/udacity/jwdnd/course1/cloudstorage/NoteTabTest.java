@@ -23,13 +23,16 @@ public class NoteTabTest extends HomePageTest {
         // confirm new row creation
         tab = homePage.selectNoteTab();
         Assertions.assertEquals(1, tab.getRows().size());
+        NoteRow noteRow = tab.getLastRow();
+        Assertions.assertEquals("note1", noteRow.getTitle());
+        Assertions.assertEquals("testing 1", noteRow.getDescription());
     }
 
     @Test
     @Order(3)
     public void update() {
         NoteTab tab = homePage.selectNoteTab();
-        tab.addNewRow("note1", "testing 1");
+        tab.addNewRow("note2", "testing 2");
 
         // edit
         tab = homePage.selectNoteTab();
@@ -40,6 +43,7 @@ public class NoteTabTest extends HomePageTest {
         tab = homePage.selectNoteTab();
         NoteRow editedRow = tab.getLastRow();
         Assertions.assertEquals("new note title", editedRow.getTitle());
+        Assertions.assertEquals("new note description", editedRow.getDescription());
     }
 
     @Test
@@ -48,7 +52,7 @@ public class NoteTabTest extends HomePageTest {
         // create
         NoteTab tab = homePage.selectNoteTab();
         int noOfNotes = tab.getRows().size();
-        tab.addNewRow("note1", "testing 1");
+        tab.addNewRow("note3", "testing 3");
 
         // delete
         tab = homePage.selectNoteTab();
