@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-public class NoteTabTest extends HomePageTest {
+public class NoteTabTest extends CloudStorageApplicationTests {
 
     @Test
     @Order(1)

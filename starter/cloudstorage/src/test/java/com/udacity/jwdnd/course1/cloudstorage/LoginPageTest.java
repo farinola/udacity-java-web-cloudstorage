@@ -8,7 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.lang.NonNull;
 
-public class LoginPageTest extends PageTest {
+public class LoginPageTest extends CloudStorageApplicationTests {
 
     private LoginPage loginPage;
 

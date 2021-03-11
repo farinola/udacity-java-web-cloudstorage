@@ -8,7 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.springframework.lang.NonNull;
 
-public class SignupPageTest extends PageTest {
+public class SignupPageTest extends CloudStorageApplicationTests {
 
     private SignupPage signupPage;
 
@@ -16,12 +16,6 @@ public class SignupPageTest extends PageTest {
         String url = String.format("http://localhost:%s/signup", port);
         driver.get(url);
         return new SignupPage(driver);
-    }
-
-    @Test
-    public void getSignupPage() {
-        this.signupPage = navigateToSignupPage(driver, this.port);
-        Assertions.assertEquals("Sign Up", driver.getTitle());
     }
 
     public static SignupPage signupCorrectly(@NonNull WebDriver driver, int port, User user) {
@@ -32,6 +26,12 @@ public class SignupPageTest extends PageTest {
         String password = user.getPassword();
         signupPage.signup(firstName, lastName, username, password);
         return signupPage;
+    }
+
+    @Test
+    public void getSignupPage() {
+        this.signupPage = navigateToSignupPage(driver, this.port);
+        Assertions.assertEquals("Sign Up", driver.getTitle());
     }
 
     @Test
