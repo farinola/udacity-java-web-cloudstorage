@@ -1,5 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.models.CredentialRow;
+import com.udacity.jwdnd.course1.cloudstorage.models.CredentialTab;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

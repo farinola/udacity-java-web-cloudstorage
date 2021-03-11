@@ -1,5 +1,8 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.models.HomePage;
+import com.udacity.jwdnd.course1.cloudstorage.models.LoginPage;
+import com.udacity.jwdnd.course1.cloudstorage.models.SignupPage;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

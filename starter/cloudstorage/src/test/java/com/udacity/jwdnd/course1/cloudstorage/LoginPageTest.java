@@ -1,5 +1,7 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.models.LoginPage;
+import com.udacity.jwdnd.course1.cloudstorage.models.SignupPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;

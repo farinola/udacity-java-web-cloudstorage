@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.models.SignupPage;
 import com.udacity.jwdnd.course1.cloudstorage.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
