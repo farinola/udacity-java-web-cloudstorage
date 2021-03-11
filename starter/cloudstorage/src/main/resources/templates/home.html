@@ -153,7 +153,7 @@
                         <tr th:each="credential : ${storedCredentials}">
                             <td>
                                 <button type="button"
-                                        th:attr="onclick=|showCredentialModal('${credential.id}', '${credential.url}', '${credential.username}', '${credential.password}')|"
+                                        th:attr="onclick=|showCredentialModal('${credential.id}', '${credential.url}', '${credential.username}', '${decryptor.decrypt(credential.password)}')|"
                                         class="btn btn-success">Edit</button>
                                 <a class="btn btn-danger"
                                    th:href="@{/credentials/{id}/delete(id=${credential.getId()})}">Delete</a>
