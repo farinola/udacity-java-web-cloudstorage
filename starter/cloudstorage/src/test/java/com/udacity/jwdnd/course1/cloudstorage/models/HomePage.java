@@ -41,6 +41,10 @@ public class HomePage {
         return new CredentialTab(driver);
     }
 
+    public void logout() {
+        this.logoutButton.click();
+    }
+
     protected void selectTab(WebElement tabNavElement) {
         tabNavElement.click();
         new WebDriverWait(driver, 3)

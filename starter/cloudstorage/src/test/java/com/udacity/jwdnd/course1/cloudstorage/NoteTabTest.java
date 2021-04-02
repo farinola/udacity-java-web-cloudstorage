@@ -11,7 +11,7 @@ public class NoteTabTest extends CloudStorageApplicationTests {
     @Test
     @Order(1)
     public void home() {
-        navigateToHome();
+        homePage = navigateToHomePageWithValidUser();
         Assertions.assertEquals("Home", driver.getTitle());
     }
 
@@ -64,5 +64,10 @@ public class NoteTabTest extends CloudStorageApplicationTests {
         // confirm deletion
         NoteTab modifiedTab = homePage.selectNoteTab();
         Assertions.assertEquals(noOfNotes, modifiedTab.getRows().size());
+        Assertions.assertFalse(
+                modifiedTab.getRows().stream().anyMatch((noteRow -> {
+                    return noteRow.getTitle().equals("note3") && noteRow.getDescription().equals("testing 3");
+                }))
+        );
     }
 }

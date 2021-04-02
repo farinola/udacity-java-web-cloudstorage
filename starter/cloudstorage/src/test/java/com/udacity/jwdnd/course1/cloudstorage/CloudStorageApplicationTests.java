@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.lang.NonNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -46,10 +47,26 @@ class CloudStorageApplicationTests {
         }
     }
 
-    public void navigateToHome() {
-        SignupPage signupPage = SignupPageTest.signupCorrectly(driver, port, validUser);
-        LoginPage loginPage = LoginPageTest.navigateToLoginPage(driver, port);
+    public static SignupPage navigateToSignupPage(@NonNull WebDriver driver, int port) {
+        String url = String.format("http://localhost:%s/signup", port);
+        driver.get(url);
+        return new SignupPage(driver);
+    }
+
+    public HomePage navigateToHomePageWithValidUser() {
+        SignupPage signupPage = signupCorrectly(driver, port, validUser);
+        LoginPage loginPage = AuthTest.navigateToLoginPage(driver, port);
         loginPage.login(validUser.getUsername(), validUser.getPassword());
-        homePage = new HomePage(driver);
+        return new HomePage(driver);
+    }
+
+    public static SignupPage signupCorrectly(@NonNull WebDriver driver, int port, User user) {
+        SignupPage signupPage = navigateToSignupPage(driver, port);
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String username = user.getUsername();
+        String password = user.getPassword();
+        signupPage.signup(firstName, lastName, username, password);
+        return signupPage;
     }
 }

@@ -11,7 +11,7 @@ public class CredentialTabTest extends CloudStorageApplicationTests {
     @Test
     @Order(1)
     public void create() {
-        navigateToHome();
+        homePage = navigateToHomePageWithValidUser();
         CredentialTab tab = homePage.selectCredentialTab();
         Assertions.assertEquals(0, tab.getRows().size());
         tab.addNewRow("gmail.com", "paul-attreides@gmail.com", "arrakisDuke98");
